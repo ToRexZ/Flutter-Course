@@ -12,22 +12,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter app'),
+        title: Text('Flutter App'),
       ),
-      body: Center(
-        child: Text('Widget playground'),
+      body: Column(
+        children: <Widget>[
+          //the card by default assumes the size of its child. Only if its parent has a clear size specification, it assumes the parent size.
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              child: Text('Chart!'),
+              elevation: 5,
+            ),
+          ),
+          Card(
+            child: Text('List of TX'),
+          )
+        ],
       ),
     );
   }
