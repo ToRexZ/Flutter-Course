@@ -20,7 +20,7 @@ class TransactionList extends StatelessWidget {
                   'No transactions added yet',
                   style: Theme.of(context).textTheme.title,
                 ),
-                //a sizedBox is a widget where you can specify the size of it, and it will take up that space, no matter if it contains a child. 
+                //a sizedBox is a widget where you can specify the size of it, and it will take up that space, no matter if it contains a child.
                 SizedBox(
                   height: 30,
                 ),
@@ -36,41 +36,32 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
+                  margin: EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 5,
+                  ),
                   elevation: 3,
-                  shadowColor: Theme.of(context).primaryColor,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 15),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 3,
-                          )),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.black,
+                      radius: 30,
+                      child: Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
                           child: Text(
-                            '\$${transactions[index].amount.toStringAsFixed(2)}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Theme.of(context).primaryColor),
-                          )),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            transactions[index].title,
+                            '\$${transactions[index].amount}',
                             style: Theme.of(context).textTheme.title,
                           ),
-                          Text(
-                            DateFormat.yMMMMd()
-                                .format(transactions[index].date),
-                            style: TextStyle(fontSize: 16, color: Colors.grey),
-                          )
-                        ],
-                      )
-                    ],
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      transactions[index].title,
+                      style: Theme.of(context).textTheme.title,
+                    ),
+                    subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date)),
                   ),
                 );
               },

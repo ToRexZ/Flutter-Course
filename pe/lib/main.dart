@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
+              button: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -50,10 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //     id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
-    // Transaction(
-    //     id: 't2', title: 'Groceries', amount: 12.55, date: DateTime.now()),
+    Transaction(
+        id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Groceries', amount: 12.55, date: DateTime.now()),
     // Transaction(id: 't3', title: 'Food', amount: 49.99, date: DateTime.now()),
     // Transaction(id: 't4', title: 'Food', amount: 49.99, date: DateTime.now()),
     // Transaction(id: 't5', title: 'Food', amount: 49.99, date: DateTime.now()),

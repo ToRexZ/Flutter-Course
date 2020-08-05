@@ -32,7 +32,7 @@ class _NewTransactionState extends State<NewTransaction> {
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
               decoration: InputDecoration(
@@ -40,7 +40,8 @@ class _NewTransactionState extends State<NewTransaction> {
                   labelStyle: TextStyle(color: Theme.of(context).primaryColor),
                   hintText: 'Groceries',
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor, width: 2),
                   )),
               controller: titleController,
             ),
@@ -50,7 +51,8 @@ class _NewTransactionState extends State<NewTransaction> {
                   labelStyle: TextStyle(color: Theme.of(context).primaryColor),
                   hintText: '29.99',
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                    borderSide: BorderSide(
+                        color: Theme.of(context).primaryColor, width: 2),
                   )),
               controller: amountController,
               keyboardType: TextInputType.number,
@@ -58,12 +60,28 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => submitData(),
               // onChanged: (value) => amountInput = value,
             ),
-            FlatButton(
+            Container(
+              height: 70,
+              child: Row(
+                children: <Widget>[
+                  Text('No Date Chosen!'),
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
               onPressed: submitData,
               child: Text(
-                'Add Transaction',
+                'Add Transaction', style: Theme.of(context).textTheme.button ,
               ),
-              textColor: Colors.white,
+              textColor: Theme.of(context).textTheme.button.color,
               color: Theme.of(context).primaryColor,
             )
           ],
