@@ -3,7 +3,6 @@ import 'package:pe/models/transaction.dart';
 import './widgets/new_transaction.dart';
 
 import './widgets/transaction_list.dart';
-import './widgets/new_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Personal expenses',
       home: MyHomePage(),
       //the difference between primaryColor and -Swatch is that the Swatch creates diffrent shades of that color.
-      theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.indigo),
+      theme: ThemeData(primarySwatch: Colors.deepOrange, accentColor: Colors.deepOrange),
     );
   }
 }
@@ -91,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.purple[300],
+                color: Theme.of(context).primaryColor,
                 child: Text('Chart!'),
                 elevation: 5,
               ),
