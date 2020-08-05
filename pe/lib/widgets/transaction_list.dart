@@ -19,7 +19,18 @@ class TransactionList extends StatelessWidget {
                 Text(
                   'No transactions added yet',
                   style: Theme.of(context).textTheme.title,
-                ), Image.asset('assets/images/waiting.png'),
+                ),
+                //a sizedBox is a widget where you can specify the size of it, and it will take up that space, no matter if it contains a child. 
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: 500,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ],
             )
           : ListView.builder(
