@@ -12,12 +12,11 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      //Listview has an infinite height, unlike the column, which has a fixed height. 
-      child: ListView(
-        children: transactions.map((tx) {
-          return Card(
+      //Listview has an infinite height, unlike the column, which has a fixed height.
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {return Card(
             elevation: 3,
-            shadowColor: Colors.purple[200],
+            shadowColor: Theme.of(context).primaryColor,
             child: Row(
               children: <Widget>[
                 Container(
@@ -25,36 +24,36 @@ class TransactionList extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         border: Border.all(
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       width: 3,
                     )),
                     child: Text(
-                      '\$${tx.amount}',
+                      '\$${transactions[index].amount.toStringAsFixed(2)}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple),
+                          color: Theme.of(context).primaryColor),
                     )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      tx.title,
+                      transactions[index].title,
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.purple),
+                          color: Theme.of(context).primaryColor),
                     ),
                     Text(
-                      DateFormat.yMMMMd().format(tx.date),
+                      DateFormat.yMMMMd().format(transactions[index].date),
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     )
                   ],
                 )
               ],
             ),
-          );
-        }).toList(),
+          );},
+        itemCount: transactions.length,
       ),
     );
   }

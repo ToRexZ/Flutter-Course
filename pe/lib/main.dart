@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pe/models/transaction.dart';
-import './widgets/user_transactions.dart';
 import './widgets/new_transaction.dart';
 
 import './widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,28 +11,79 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Personal expenses',
       home: MyHomePage(),
+      //the difference between primaryColor and -Swatch is that the Swatch creates diffrent shades of that color.
+      theme: ThemeData(primarySwatch: Colors.indigo, accentColor: Colors.indigo),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   // String titleInput;
   // int amountInput;
 
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+  final List<Transaction> _userTransactions = [
+    Transaction(
+        id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'Groceries', amount: 12.55, date: DateTime.now()),
+    Transaction(id: 't3', title: 'Food', amount: 49.99, date: DateTime.now()),
+    Transaction(id: 't4', title: 'Food', amount: 49.99, date: DateTime.now()),
+    Transaction(id: 't5', title: 'Food', amount: 49.99, date: DateTime.now()),
+    Transaction(id: 't6', title: 'Food', amount: 49.99, date: DateTime.now()),
+    Transaction(id: 't7', title: 'Food', amount: 49.99, date: DateTime.now()),
+    Transaction(id: 't8', title: 'Food', amount: 49.99, date: DateTime.now()),
+  ];
+
+  void _addNewTransaction(String title, double amount) {
+    final newTx = Transaction(
+        title: title,
+        amount: amount,
+        date: DateTime.now(),
+        id: DateTime.now().toString());
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          child: NewTransaction(_addNewTransaction),
+          onTap: () {},
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
-        backgroundColor: Colors.purple,
+        title: Text('Personal Expenses'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(
+                Icons.add,
+                size: 35,
+              ),
+              onPressed: () => _startAddNewTransaction(context))
+        ],
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -40,15 +91,20 @@ class MyHomePage extends StatelessWidget {
             Container(
               width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Colors.purple[300],
                 child: Text('Chart!'),
                 elevation: 5,
               ),
             ),
-            UserTransactions()
+            TransactionList(_userTransactions)
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _startAddNewTransaction(context),
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
