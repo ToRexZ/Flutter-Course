@@ -13,7 +13,26 @@ class MyApp extends StatelessWidget {
       title: 'Personal expenses',
       home: MyHomePage(),
       //the difference between primaryColor and -Swatch is that the Swatch creates diffrent shades of that color.
-      theme: ThemeData(primarySwatch: Colors.deepOrange, accentColor: Colors.deepOrange),
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        accentColor: Colors.orange,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+        ),
+      ),
     );
   }
 }
@@ -30,16 +49,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   final List<Transaction> _userTransactions = [
-    Transaction(
-        id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'Groceries', amount: 12.55, date: DateTime.now()),
-    Transaction(id: 't3', title: 'Food', amount: 49.99, date: DateTime.now()),
-    Transaction(id: 't4', title: 'Food', amount: 49.99, date: DateTime.now()),
-    Transaction(id: 't5', title: 'Food', amount: 49.99, date: DateTime.now()),
-    Transaction(id: 't6', title: 'Food', amount: 49.99, date: DateTime.now()),
-    Transaction(id: 't7', title: 'Food', amount: 49.99, date: DateTime.now()),
-    Transaction(id: 't8', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't1', title: 'New shoes', amount: 69.99, date: DateTime.now()),
+    // Transaction(
+    //     id: 't2', title: 'Groceries', amount: 12.55, date: DateTime.now()),
+    // Transaction(id: 't3', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: 't4', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: 't5', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: 't6', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: 't7', title: 'Food', amount: 49.99, date: DateTime.now()),
+    // Transaction(id: 't8', title: 'Food', amount: 49.99, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String title, double amount) {
@@ -71,7 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Personal Expenses'),
+        title: Text(
+          'Personal Expenses',
+        ),
         actions: <Widget>[
           IconButton(
               icon: Icon(
