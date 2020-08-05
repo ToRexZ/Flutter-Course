@@ -3,6 +3,7 @@ import 'package:pe/models/transaction.dart';
 import './widgets/new_transaction.dart';
 
 import './widgets/transaction_list.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -61,6 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
     // Transaction(id: 't8', title: 'Food', amount: 49.99, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where(
+      (tx) => tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      ),
+    ).toList();
+  }
+
   void _addNewTransaction(String title, double amount) {
     final newTx = Transaction(
         title: title,
@@ -108,14 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             //the card by default assumes the size of its child. Only if its parent has a clear size specification, it assumes the parent size.
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Theme.of(context).primaryColor,
-                child: Text('Chart!'),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions)
           ],
         ),
